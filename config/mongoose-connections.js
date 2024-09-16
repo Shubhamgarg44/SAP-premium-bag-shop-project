@@ -1,10 +1,11 @@
-const { Db } = require('mongodb');
 const mongoose = require('mongoose')
+const dbgr = require("debug")('development:mongoose') 
+const config = require('config')
 
-mongoose.connect('mongodb://127.0.0.1:27017/SAP-Luxe-Bags').then(function(){
-    console.log('connected to database')
+mongoose.connect(`${config.get("MONGODB_URL")}`).then(function(){
+    dbgr('connected to database')
 }).catch(function(err){
-    console.log(err)
+    dbgr(err)
 })
 
 module.exports = mongoose.connection;
